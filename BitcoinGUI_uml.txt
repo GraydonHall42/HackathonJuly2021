@@ -1,0 +1,18 @@
+@startuml
+class BitcoinGUI(){
+	-prompt: JTextLabel
+	-inField: JTextField
+	-currency: JLabel
+	-mineRateLabel: JTextLabel
+	-mineRate: JTextArea
+	-mineRateUnit:JTextLabel
+	-goButton: JButton
+	-mineTimeLabel: JLabel
+	-dateLabel: JLabel
+	-mineTime: JTextArea
+	-dateAccessed:JTextArea
+	+BitCoinGUI(title: String)
+	+buildGUI():void
+	+actionPerformed(ActionEvent e):void
+}
+@enduml
