@@ -8,12 +8,21 @@ public class MiningElectricity {
     //1 Bitcoin takes 1544 kwh to complete - 53 days
 
     private double cost = 0.13;
+    // private int numOfCols = 2;
+    private int numOfRows = 0;
+    private double elecArr[];
     Scanner sc;
-    private double[] tempsArray;
+    private static double[] tempsArray;
 
 
-    public void openFile(){
-        double token1 = 0.0;
+    public void openFile() throws FileNotFoundException {
+
+        // String line;
+        // double token1 = 0.0;
+        String line;
+        Scanner s = null;
+        s = new Scanner( new File("EnergyRates.csv"));  // read in the CSV file
+        elecArr = new double[24]; 
         
         try {
             sc = new Scanner(new File("EnergyRates.csv"));
@@ -25,19 +34,41 @@ public class MiningElectricity {
 
         List<Double> temps = new ArrayList<Double>();
 
-        while (sc.hasNextDouble())  //returns a boolean value  
-        {  
-        // System.out.print(sc.next());  //find and returns the next complete token from this scanner  
-            token1 = sc.nextDouble();
-            temps.add(token1);
-        }   
+        while(sc.hasNextLine()) {  // while there's more lines to read
+            line = sc.nextLine();  // read next line
+            String[] rowAsString;
+            rowAsString = line.split(",");  // split row into array of 3 strings
+
+            // read row into CSV Data array for later use
+            for (int i=1; i < rowAsString.length; i++) {
+                elecArr[numOfRows]= Double.parseDouble(rowAsString[i]);
+                numOfRows++; 
+            }
+            // miningRate += Double.parseDouble(rowAsString[1]);  // add each miner to mining rate
+             // increment so we can go to next row
+
+        }
+        for (int i=0; i < elecArr.length; i++) {
+            System.out.println(elecArr[i]);
+        }
+        
+
+
+
+        // List<String> lines = File.readAllLines(file.toPath(), StandardCharsets.UTF_8);
+        // for (String line : lines) { 
+        //     String[] array = line.split(";"); 
+        //     System.out.println(array[0]+" "+array[array.length-1]); 
+        //  }
+
         sc.close();  //closes the scanner  
 
-        // tempsArray = temps.toArray();
+        // tempsArray = temps.toArray(temps[0][0]);
 
-        for (double d : tempsArray) {
-            System.out.println(d);
-          }
+        // for (double d : temps) {
+        //     System.out.println(d);
+        //   }
+
     }  
 
     public double findMax(){
@@ -54,9 +85,7 @@ public class MiningElectricity {
                 maximum = tempsArray[i];   // new maximum
             }
         }
-
         return maximum;
-
     }
 
 
@@ -65,14 +94,19 @@ public class MiningElectricity {
 
         MiningElectricity electricity = new MiningElectricity();
         
-        electricity.openFile();
-        maxElectricity = electricity.findMax();
+        try {
+            electricity.openFile();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-        System.out.println("The maximum energy rate is at: " + maxElectricity);
-        
-        
+        // for (int i = 0 ; i<tempsArray.length; i++){
+        //  System.out.println(tempsArray);
+        // }
+        // maxElectricity = electricity.findMax();
 
-
+        // System.out.println("The maximum energy rate is at: " + maxElectricity);
 
 
 }   
