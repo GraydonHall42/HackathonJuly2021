@@ -13,29 +13,32 @@ public class BitcoinRates {
     private double[][] csvData;
     private double miningRate = 0;  // counter for our current mining rate (all miners going)
     private double requiredHrsToMine;
-
     private Miner[] miners;
+
 
 
     /**
      * @param btcRate the current market price of bitcoin in USD
      * @param btcAmt the amount of BTC they want to mine (in USD)
      */
-    public BitcoinRates(Double btcRate, Double btcAmt) {
+    public BitcoinRates(Double btcRate, Double btcAmt) throws FileNotFoundException {
         this.fileName = "MiningSetup.csv";  // CSV containing their miners.
         this.btcRate = btcRate;
         this.btcAmt = btcAmt;
+        readCSV();  // gets our CSV data
     }
 
     /**
      * @return required hours required to mine the amount of bitcoin the user specified
      * based on the current price of bitcoin, and the mining setup they are using
-     * @throws FileNotFoundException
      */
-    public double getRequiredHrsToMine() throws FileNotFoundException {
-        readCSV();  // gets our CSV data
+    public double getRequiredHrsToMine() {
         requiredHrsToMine = btcAmt / btcRate / miningRate;
         return requiredHrsToMine;
+    }
+
+    public Miner[] getMiners() {
+        return miners;
     }
 
 
@@ -52,6 +55,8 @@ public class BitcoinRates {
             String[] rowAsString;
             rowAsString = line.split(",");  // split row into array of 3 strings
 
+
+            // create miner and add to miner array
             String minerName = rowAsString[0];
             double minerRate = Double.parseDouble(rowAsString[1]);
             double minerWattage = Double.parseDouble(rowAsString[2]);
@@ -85,12 +90,16 @@ public class BitcoinRates {
         // for this version: we assume all miners are working around the clock.
 
 
-        var x = new BitcoinRates(33694.9726, 100.00);
+        BitcoinRates x = null;
         try {
-            System.out.println(x.getRequiredHrsToMine());
+            x = new BitcoinRates(33694.9726, 100.00);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        System.out.println(x.getRequiredHrsToMine());
+        System.out.println(Arrays.toString(x.getMiners()));
+
 
     }
 
