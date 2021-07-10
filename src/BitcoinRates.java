@@ -11,10 +11,10 @@ public class BitcoinRates {
     private double btcRate;  // price for BTC in USD
     private double btcAmt;  // amount of BTC they want to mine in USD
     private double[][] csvData;
-    double miningRate = 0;  // counter for our current mining rate (all miners going)
+    private double miningRate = 0;  // counter for our current mining rate (all miners going)
+    private double requiredHrsToMine;
 
-    // hours req'd to mine the bitcoin based on current price, how much they want to mine, and their mining setup
-    double requiredHrsToMine;
+    private Miner[] miners;
 
 
     /**
@@ -44,23 +44,33 @@ public class BitcoinRates {
         Scanner s = null;
         s = new Scanner( new File(fileName));  // read in the CSV file
         csvData = new double[25][numOfCols];  // array to hold our CSV data, up to 25 rows
+        miners = new Miner[25];
+        Miner m;
 
         while(s.hasNextLine()) {  // while there's more lines to read
             line = s.nextLine();  // read next line
             String[] rowAsString;
             rowAsString = line.split(",");  // split row into array of 3 strings
 
+            String minerName = rowAsString[0];
+            double minerRate = Double.parseDouble(rowAsString[1]);
+            double minerWattage = Double.parseDouble(rowAsString[2]);
+            m = new Miner(minerName, minerRate, minerWattage);
+            miners[numOfRows] = m;
+
+
             // read row into CSV Data array for later use
             for (int i=1; i < rowAsString.length; i++) {
                 csvData[numOfRows][i]= Double.parseDouble(rowAsString[i]);
             }
 
+            // keep track of total mining rate
             miningRate += Double.parseDouble(rowAsString[1]);  // add each miner to mining rate
             numOfRows++;  // increment so we can go to next row
         }
 
-        System.out.println(Arrays.deepToString(csvData));  // visualize CSV as array
-        System.out.println(miningRate);  // print calculated mining rate
+//        System.out.println(Arrays.deepToString(csvData));  // visualize CSV as array
+//        System.out.println(miningRate);  // print calculated mining rate
 
     }
 
