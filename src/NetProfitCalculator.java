@@ -30,7 +30,7 @@ public class NetProfitCalculator {
 
 
         // For each miner:
-        System.out.println("--------------- Hourly Profit For each of your miners ----------------");
+        System.out.println("--------------- Hourly Profit ($) For each of your miners ----------------");
         for(int i=0;i<br.numMiners(); i++){
             Miner currentMiner = miners[i];
             var miningCalc = new MiningNetProfit(btcPrice, currentMiner.wattage, currentMiner.rate, elecArray);
