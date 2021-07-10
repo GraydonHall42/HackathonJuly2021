@@ -11,10 +11,11 @@ public class MiningElectricity {
     // private int numOfCols = 2;
     private int numOfRows = 0;
     private double elecArr[];
+    private double profitArr[];
     Scanner sc;
     private static double[] tempsArray;
     
-    public double[] getElecricityRate(){
+    public double[] getElectricityRate(){
         return this.elecArr;
     }
 
@@ -49,15 +50,8 @@ public class MiningElectricity {
              // increment so we can go to next row
 
         }
-        for (int i=0; i < elecArr.length; i++) {
-            System.out.println(elecArr[i]);
-        }
 
         sc.close();  //closes the scanner  
-
-        
-
-
     }  
 
     public double findMax(){
