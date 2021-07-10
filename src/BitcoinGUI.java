@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 /**
@@ -7,7 +10,7 @@ import javax.swing.*;
  * @author Rohinesh Ram
  *
  */
-public class BitcoinGUI extends JFrame {
+public class BitcoinGUI extends JFrame implements ActionListener {
 	
 	private JLabel prompt;
 	private JTextField inField;
@@ -47,7 +50,7 @@ public class BitcoinGUI extends JFrame {
 		goButton = new JButton("Go");
 		
 		// mine time
-		mineTimeLabel = new JLabel("Time to mine");
+		mineTimeLabel = new JLabel("Time To Mine");
 		mineTime = new JTextArea(1,10);
 		
 		// date accessed
@@ -91,13 +94,27 @@ public class BitcoinGUI extends JFrame {
 		constraint.gridx = 1;
 		constraint.gridy = 2;
 		inputPanel.add(goButton, constraint);
+		goButton.addActionListener(this);
 		
 		// time to mine label
 		constraint.gridx = 0;
 		constraint.gridy = 3;
 		inputPanel.add(mineTimeLabel, constraint);
 		
-		// 
+		// time to mine
+		constraint.gridx = 1;
+		constraint.gridy = 3;
+		inputPanel.add(mineTime, constraint);
+		
+		// date accessed label
+		constraint.gridx = 0;
+		constraint.gridy = 4;
+		inputPanel.add(dateLabel, constraint);
+		
+		// date accessed
+		constraint.gridx = 1;
+		constraint.gridy = 4;
+		inputPanel.add(dateAccessed, constraint);
 		
 		contentPane.add(inputPanel);
 	}
@@ -105,5 +122,12 @@ public class BitcoinGUI extends JFrame {
 	
 	public static void main(String[] args) {
 		BitcoinGUI app = new BitcoinGUI("BTC");
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// ADD code to run Brandons class
+		// Add code to run Gradys class
+		
 	}
 }
