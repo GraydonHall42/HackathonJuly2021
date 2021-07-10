@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 public class NetProfitCalculator {
-    public static void main(String[] args) {
+    public void calcHourlyProfit() {
 
         BitcoinRates br = null;
         try {
@@ -25,10 +25,15 @@ public class NetProfitCalculator {
 
         var miners = br.getMiners();
 
+        // ********** ADDD CODE HERE TO GET BITCOIN PRICE FROM BRANDON *********
+        double btcPrice = 33695.0;
+
+
         // For each miner:
+        System.out.println("--------------- Hourly Profit For each of your miners ----------------");
         for(int i=0;i<br.numMiners(); i++){
             Miner currentMiner = miners[i];
-            var miningCalc = new MiningNetProfit(33695.0, currentMiner.wattage, currentMiner.rate, elecArray);
+            var miningCalc = new MiningNetProfit(btcPrice, currentMiner.wattage, currentMiner.rate, elecArray);
 
             System.out.println(currentMiner.name);
             System.out.println(Arrays.toString(miningCalc.getNetProfitHourly()));
@@ -38,6 +43,11 @@ public class NetProfitCalculator {
 
 
 
+    }
+
+    public static void main(String[] args) {
+        var x = new NetProfitCalculator();
+        x.calcHourlyProfit();
     }
 
 
