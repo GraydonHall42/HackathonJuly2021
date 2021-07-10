@@ -49,23 +49,8 @@ public class MiningElectricity {
         for (int i=0; i < elecArr.length; i++) {
             System.out.println(elecArr[i]);
         }
-        
-
-
-
-        // List<String> lines = File.readAllLines(file.toPath(), StandardCharsets.UTF_8);
-        // for (String line : lines) { 
-        //     String[] array = line.split(";"); 
-        //     System.out.println(array[0]+" "+array[array.length-1]); 
-        //  }
 
         sc.close();  //closes the scanner  
-
-        // tempsArray = temps.toArray(temps[0][0]);
-
-        // for (double d : temps) {
-        //     System.out.println(d);
-        //   }
 
     }  
 
@@ -73,11 +58,7 @@ public class MiningElectricity {
 
         double maximum = tempsArray[0]; 
 
-        // for (int i=1; i<tempsArray.length; i++) {
-        //     tempsArray[i] = .valueOf(tempsArray[i]); // new maximum
-        //     }
-        
-          // start with the first value
+        // start with the first value
         for (int i=1; i<tempsArray.length; i++) {
             if (tempsArray[i] > maximum) {
                 maximum = tempsArray[i];   // new maximum
@@ -99,13 +80,5 @@ public class MiningElectricity {
             e.printStackTrace();
         }
 
-        // for (int i = 0 ; i<tempsArray.length; i++){
-        //  System.out.println(tempsArray);
-        // }
-        // maxElectricity = electricity.findMax();
-
-        // System.out.println("The maximum energy rate is at: " + maxElectricity);
-
-
-}   
+    }   
 }   
