@@ -13,7 +13,10 @@ public class MiningElectricity {
     private double elecArr[];
     Scanner sc;
     private static double[] tempsArray;
-
+    
+    public double[] getElecricityRate(){
+        return this.elecArr;
+    }
 
     public void openFile() throws FileNotFoundException {
 
@@ -52,6 +55,9 @@ public class MiningElectricity {
 
         sc.close();  //closes the scanner  
 
+        
+
+
     }  
 
     public double findMax(){
@@ -72,6 +78,7 @@ public class MiningElectricity {
         double maxElectricity;
 
         MiningElectricity electricity = new MiningElectricity();
+
         
         try {
             electricity.openFile();
