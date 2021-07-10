@@ -53,7 +53,7 @@ public class BitcoinRates {
         }
 
         System.out.println(Arrays.deepToString(csvData));  // visualize CSV as array
-        System.out.println(miningRate);
+        System.out.println(miningRate);  // print calculated mining rate
 
 
     }
