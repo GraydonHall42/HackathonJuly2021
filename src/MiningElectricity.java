@@ -20,12 +20,10 @@ public class MiningElectricity {
         // String line;
         // double token1 = 0.0;
         String line;
-        Scanner s = null;
-        s = new Scanner( new File("EnergyRates.csv"));  // read in the CSV file
         elecArr = new double[24]; 
         
         try {
-            sc = new Scanner(new File("EnergyRates.csv"));
+            sc = new Scanner(new File("EnergyRates.csv"));  // read in the CSV file
             sc.useDelimiter(" , "); 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
