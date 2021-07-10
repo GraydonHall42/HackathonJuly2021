@@ -15,7 +15,9 @@ public class BitcoinRates {
     private double requiredHrsToMine;
     private Miner[] miners;
 
-
+    public int numMiners(){
+        return this.numOfRows;
+    }
 
     /**
      * @param btcRate the current market price of bitcoin in USD

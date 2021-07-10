@@ -1,7 +1,7 @@
 public class Miner {
-    private String name;
-    private double rate;
-    private double wattage;
+    public String name;
+    public double rate;
+    public double wattage;
 
     public Miner(String name, double rate, double wattage) {
         this.name = name;
