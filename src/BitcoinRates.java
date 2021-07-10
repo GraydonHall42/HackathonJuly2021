@@ -13,20 +13,30 @@ public class BitcoinRates {
     private double[][] csvData;
     double miningRate = 0;  // counter for our current mining rate (all miners going)
 
+    // hours req'd to mine the bitcoin based on current price, how much they want to mine, and their mining setup
+    double requiredHrsToMine;
+
+
+    /**
+     * @param btcRate the current market price of bitcoin in USD
+     * @param btcAmt the amount of BTC they want to mine (in USD)
+     */
+    public BitcoinRates(Double btcRate, Double btcAmt) {
+        this.fileName = "MiningSetup.csv";  // CSV containing their miners.
+        this.btcRate = btcRate;
+        this.btcAmt = btcAmt;
+    }
+
+    /**
+     * @return required hours required to mine the amount of bitcoin the user specified
+     * based on the current price of bitcoin, and the mining setup they are using
+     * @throws FileNotFoundException
+     */
     public double getRequiredHrsToMine() throws FileNotFoundException {
         readCSV();  // gets our CSV data
         requiredHrsToMine = btcAmt / btcRate / miningRate;
         return requiredHrsToMine;
     }
-
-    double requiredHrsToMine;
-
-    public BitcoinRates(Double btcRate, Double btcAmt) {
-        this.fileName = "MiningSetup.csv";
-        this.btcRate = btcRate;
-        this.btcAmt = btcAmt;
-    }
-
 
 
     private void readCSV() throws FileNotFoundException {
@@ -35,25 +45,22 @@ public class BitcoinRates {
         s = new Scanner( new File(fileName));  // read in the CSV file
         csvData = new double[25][numOfCols];  // array to hold our CSV data, up to 25 rows
 
-
-
         while(s.hasNextLine()) {  // while there's more lines to read
             line = s.nextLine();  // read next line
             String[] rowAsString;
             rowAsString = line.split(",");  // split row into array of 3 strings
 
-            // read rwo into CSV Data array for later use
+            // read row into CSV Data array for later use
             for (int i=1; i < rowAsString.length; i++) {
                 csvData[numOfRows][i]= Double.parseDouble(rowAsString[i]);
             }
 
-            miningRate += Double.parseDouble(rowAsString[1]);  // add rate to mining rate
+            miningRate += Double.parseDouble(rowAsString[1]);  // add each miner to mining rate
             numOfRows++;  // increment so we can go to next row
         }
 
         System.out.println(Arrays.deepToString(csvData));  // visualize CSV as array
         System.out.println(miningRate);  // print calculated mining rate
-
 
     }
 
