@@ -32,8 +32,7 @@ public class BitcoinRates {
     private void readCSV() throws FileNotFoundException {
         String line;
         Scanner s = null;
-        s = new Scanner( new File(fileName));  // scan in the text file
-
+        s = new Scanner( new File(fileName));  // read in the CSV file
         csvData = new double[25][numOfCols];  // array to hold our CSV data, up to 25 rows
 
 
@@ -59,14 +58,15 @@ public class BitcoinRates {
     }
 
     public static void main(String[] args) {
+        // use this class to test my method of getting hours required to mine $X of BTC
+        // inputs:
+        //   - how much bitcoin they want to mine (in USD) (ex $100)
+        //   - current rate (price) of BTC in USD (ex $33,695)
+        // outputs:
+        //  - hours required to mine the btc as a double
 
-        // input = how much bitcoin they want to mine (in USD)
+        // for this version: we assume all miners are working around the clock.
 
-        // read in CSV (locally)
-        // all my miners are going at once...
-        // note that we could add complexity later... only have bravo going 12-5 for example.
-
-        // get how much they want to mine
 
         var x = new BitcoinRates(33694.9726, 100.00);
         try {
